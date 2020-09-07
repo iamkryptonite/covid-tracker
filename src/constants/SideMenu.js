@@ -1,7 +1,6 @@
 import React from 'react'
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu} from 'antd';
 import {
-  DesktopOutlined,
   HomeOutlined,
   TeamOutlined,
   LineChartOutlined,
@@ -24,12 +23,10 @@ class SideMenu extends React.Component{
       };
       printStates(){
         // var key = 3;
-        var states = this.state.allstates;
-        var statenames = states.map((val,index)=>(
-          <Menu.Item key={index}>{val}</Menu.Item>
-        ));
-        // return statenames;
-        // console.log(this.props.states)
+        // var states = this.state.allstates;
+        // var statenames = states.map((val,index)=>(
+        //   <Menu.Item key={index}>{val}</Menu.Item>
+        // ));
       }    
       render() {
         return (
@@ -39,14 +36,7 @@ class SideMenu extends React.Component{
                 <Menu.Item key="1" icon={<HomeOutlined />}>
                   <a href="/">Home</a>
                 </Menu.Item>
-                {/* <Menu.Item key="2" icon={<DesktopOutlined />}>
-                  Option 2
-                </Menu.Item> */}
                 <SubMenu key="sub1" icon={<LineChartOutlined />} title="Statewise">
-                  {/* <Menu.Item key="3">Tom</Menu.Item>
-                  <Menu.Item key="4">Bill</Menu.Item>
-                  <Menu.Item key="5">Alex</Menu.Item> */}
-                  {this.printStates()}
                 </SubMenu>
                 <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
                   <Menu.Item key="6">Team 1</Menu.Item>

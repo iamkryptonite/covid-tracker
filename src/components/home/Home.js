@@ -1,8 +1,11 @@
 import React from 'react'
 import axios from 'axios'
-import { Table } from 'antd'
+import { Table,Row,Col } from 'antd'
 import './Home.css'
 import SideMenu from '../../constants/SideMenu'
+import CanvasJSReact from '../../canvasjs.react';
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 const columns = [
     {
       title: 'Name',
@@ -13,7 +16,6 @@ const columns = [
     {
       title: 'Active',
       dataIndex: 'active',
-      // width:50,
       sorter: {
         compare: (a, b) => a.active - b.active,
         multiple: 4,
@@ -22,7 +24,6 @@ const columns = [
     {
       title: 'Confirmed',
       dataIndex: 'confirmed',
-      // width:50,
       sorter: {
         compare: (a, b) => a.confirmed - b.confirmed,
         multiple: 3,
@@ -31,7 +32,6 @@ const columns = [
     {
       title: 'Deaths',
       dataIndex: 'deaths',
-      // width:50,
       sorter: {
         compare: (a, b) => a.deaths - b.deaths,
         multiple: 2,
@@ -40,13 +40,44 @@ const columns = [
     {
       title: 'Recovered',
       dataIndex: 'recovered',
-      // width:50,
       sorter: {
         compare: (a, b) => a.recovered - b.recovered,
         multiple: 1,
       },
     },
   ];
+  const options = {
+    
+    animationEnabled: true,
+    title:{
+      text: ""
+      
+    },
+    axisX: {
+      // valueFormatString: "MMM"
+    },
+    axisY: {
+      // title: "Sales (in USD)",
+      // prefix: "$"
+    },
+    data: [{
+      // yValueFormatString: "$#,###",
+      // xValueFormatString: "MMMM",
+      type: "spline",
+      markerColor:"#bf422c",
+      lineColor:"#bf422c",
+      dataPoints: [
+        { x: new Date(2017, 0), y: 25060},
+        { x: new Date(2017, 1), y: 27980 },
+        { x: new Date(2017, 3), y: 32400 },
+        { x: new Date(2017, 4), y: 35260 },
+        { x: new Date(2017, 5), y: 33900 },
+        { x: new Date(2017, 8), y: 32300 },
+        { x: new Date(2017, 10), y: 37160 },
+        { x: new Date(2017, 11), y: 38400 }
+      ]
+    }]
+  }
 var data=[];
 class Home extends React.Component{
     state={}        
@@ -83,8 +114,21 @@ class Home extends React.Component{
         return(
             <>
               <SideMenu/>
-              <main>                    
-                  <Table columns={columns} dataSource={this.state.data} onChange={this.onChange} pagination={false} size={"small"}/>
+              <main>
+                <Row gutter={16}>
+                  <Col span={12}>
+                    <div className="table">
+                      <Table columns={columns} dataSource={this.state.data} onChange={this.onChange} pagination={false} size={"small"}/>
+                    </div>
+                  </Col>
+                  <Col span={12}>
+                    <CanvasJSChart options = {options}/>
+                    <br/>
+                    <CanvasJSChart options = {options}/>
+                    <br/>
+                    <CanvasJSChart options = {options}/>
+                  </Col>
+                </Row>
               </main>
             </>
         )

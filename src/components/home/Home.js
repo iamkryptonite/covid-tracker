@@ -46,41 +46,33 @@ const columns = [
       },
     },
   ];
-  const options = {
-    
-    animationEnabled: true,
-    title:{
-      text: ""
-      
-    },
-    axisX: {
-      // valueFormatString: "MMM"
-    },
-    axisY: {
-      // title: "Sales (in USD)",
-      // prefix: "$"
-    },
-    data: [{
-      // yValueFormatString: "$#,###",
-      // xValueFormatString: "MMMM",
-      type: "spline",
-      markerColor:"#bf422c",
-      lineColor:"#bf422c",
-      dataPoints: [
-        { x: new Date(2017, 0), y: 25060},
-        { x: new Date(2017, 1), y: 27980 },
-        { x: new Date(2017, 3), y: 32400 },
-        { x: new Date(2017, 4), y: 35260 },
-        { x: new Date(2017, 5), y: 33900 },
-        { x: new Date(2017, 8), y: 32300 },
-        { x: new Date(2017, 10), y: 37160 },
-        { x: new Date(2017, 11), y: 38400 }
-      ]
-    }]
-  }
+  
 var data=[];
+var options = {
+    
+  animationEnabled: true,
+  title:{
+    text: ""
+    
+  },
+  axisX: {
+    // valueFormatString: "MMM"
+  },
+  axisY: {
+    // title: "Sales (in USD)",
+    // prefix: "$"
+  },
+  data: [{
+    // yValueFormatString: "$#,###",
+    // xValueFormatString: "MMMM",
+    type: "spline",
+    markerColor:"#bf422c",
+    lineColor:"#bf422c",
+    dataPoints: this.state.deaths
+  }]
+}
 class Home extends React.Component{
-    state={}        
+    state={recovered:[],deaths:[],active:[]}        
     componentDidMount(){
       axios.get('https://api.covid19india.org/data.json').then(res=>{
       this.setState({
@@ -99,7 +91,19 @@ class Home extends React.Component{
             recovered:parseInt(el.recovered)  
           })
         }         
-      });
+      })
+      var t=1;
+      this.state.casestimeseries.forEach(el => {
+        if(t<=20){
+          this.state.active.push({x:el.date,y:el.totalconfirmed});
+          this.state.deaths.push({x:el.date,y:el.totaldeceased});
+          this.state.recovered.push({x:el.date,y:el.totalrecovered});
+          t++;
+        }
+        
+
+      })
+      // options.data.dataPoints=this.state.deaths;
     }).catch(err=>{
       console.log(err);
     }).then(()=>{
@@ -111,6 +115,7 @@ class Home extends React.Component{
       console.log('params', pagination, filters, sorter, extra);
     }
     render(){
+      
         return(
             <>
               <SideMenu/>

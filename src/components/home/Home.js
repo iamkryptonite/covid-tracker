@@ -3,9 +3,7 @@ import axios from 'axios'
 import { Table,Row,Col } from 'antd'
 import './Home.css'
 import SideMenu from '../../constants/SideMenu'
-import CanvasJSReact from '../../canvasjs.react';
-// var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+import {Line} from 'react-chartjs-2';
 const columns = [
     {
       title: 'Name',
@@ -47,27 +45,87 @@ const columns = [
     },
   ];
 var data=[];
-var options = {
-  animationEnabled: true,
-			title:{
-				text: "Monthly Sales - 2017"
-			},
-			axisX: {
-				valueFormatString: "MMM"
-			},
-			axisY: {
-				title: "Sales (in USD)",
-				// prefix: "$"
-			},
-			data: [{
-				// yValueFormatString: "#####",
-				// xValueFormatString: "MMMM",
-				type: "spline",
-        dataPoints: ""
-      }]
-}
+var line1 = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'Daily Confirmed Cases',
+      fill: false,
+      lineTension: 0.4,
+      backgroundColor: '',
+      borderColor: '',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 6,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 4,
+      pointHitRadius: 10,
+      data: ""
+    }
+  ]
+};
+var line2 = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'Daily Confirmed Cases',
+      fill: false,
+      lineTension: 0.4,
+      backgroundColor: '',
+      borderColor: '',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 6,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 4,
+      pointHitRadius: 10,
+      data: ""
+    }
+  ]
+};
+var line3 = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'Daily Confirmed Cases',
+      fill: false,
+      lineTension: 0.4,
+      backgroundColor: '',
+      borderColor: '',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 6,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 4,
+      pointHitRadius: 10,
+      data: ""
+    }
+  ]
+};
+
 class Home extends React.Component{
-    state={recovered:[],deaths:[],active:[],options:options}
+    state={recovered:[],deaths:[],active:[]};
     componentDidMount(){
       axios.get('https://api.covid19india.org/data.json').then(res=>{
       this.setState({
@@ -89,24 +147,45 @@ class Home extends React.Component{
       })
       var t=1;
       this.state.casestimeseries.forEach(el => {
-          this.state.active.push({x:t,y:parseInt(el.totalconfirmed)});
-          this.state.deaths.push({x:t,y:parseInt(el.totaldeceased)});
-          this.state.recovered.push({x:t,y:parseInt(el.totalrecovered)});
+          this.state.active.push(parseInt(el.dailyconfirmed));
+          this.state.deaths.push(parseInt(el.dailydeceased));
+          this.state.recovered.push(parseInt(el.dailyrecovered));
           t++;
-          if(t>20){
+          if(t>10){
             this.state.active.shift();
             this.state.deaths.shift();
             this.state.recovered.shift();
           }
       })
-    }).catch(err=>{
+    })
+    .catch(err=>{
       console.log(err);
     })
     .then(()=>{
       this.setState({data:data});
-      options.data[0].dataPoints=this.state.deaths;
-      this.setState({options:options});
-      console.log(this.state.options);
+      // let line1=line;
+      // let line2=line;
+      console.log(line1);
+      line1.datasets[0].label="Daily Confirmed Cases";
+      line1.datasets[0].borderColor="#d13f3f";
+      line1.datasets[0].pointBorderColor="#d13f3f";
+      line1.datasets[0].pointHoverBackgroundColor="#d13f3f";
+      line1.datasets[0].pointHoverBorderColor="#d13f3f";
+      line1.datasets[0].data=this.state.active;
+      line2.datasets[0].label="Daily Deaths";
+      line2.datasets[0].borderColor="#8a8a8a";
+      line2.datasets[0].pointBorderColor="#8a8a8a";
+      line2.datasets[0].pointHoverBackgroundColor="#8a8a8a";
+      line2.datasets[0].pointHoverBorderColor="#8a8a8a";
+      line2.datasets[0].data=this.state.deaths;
+      line3.datasets[0].label="Daily Recovery";
+      line3.datasets[0].borderColor="#30c238";
+      line3.datasets[0].pointBorderColor="#30c238";
+      line3.datasets[0].pointHoverBackgroundColor="#30c238";
+      line3.datasets[0].pointHoverBorderColor="#30c238";
+      line3.datasets[0].data=this.state.recovered;
+      this.setState({line1:line1,line2:line2,line3:line3})
+
     })
     }
     onChange(pagination, filters, sorter, extra) {
@@ -117,18 +196,23 @@ class Home extends React.Component{
             <>
               <SideMenu/>
               <main>
-                <Row gutter={16}>
+                <Row gutter={32}>
                   <Col span={12}>
                     <div className="table">
                       <Table columns={columns} dataSource={this.state.data} onChange={this.onChange} pagination={false} size={"small"}/>
                     </div>
                   </Col>
-                  <Col span={12}>
-                    <CanvasJSChart options = {this.state.options}/>
+                  <Col span={2}/>
+                  <Col span={8}>
+                    <Line data={this.state.line1} />
                     <br/>
-                    <CanvasJSChart options = {this.state.options}/>
                     <br/>
-                    <CanvasJSChart options = {options}/>
+                    <br/>
+                    <Line data={this.state.line2} />
+                    <br/>
+                    <br/>
+                    <br/>
+                    <Line data={this.state.line3} />
                   </Col>
                 </Row>
               </main>

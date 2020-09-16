@@ -143,6 +143,13 @@ class Home extends React.Component{
             deaths:parseInt(el.deaths),
             recovered:parseInt(el.recovered)
           })
+        }else{
+          this.setState({
+            totalactive:parseInt(el.active),
+            totalconfirmed:parseInt(el.confirmed),
+            totaldeaths:parseInt(el.deaths),
+            totalrecovered:parseInt(el.recovered)
+          })
         }
       })
       var t=1;
@@ -201,6 +208,20 @@ class Home extends React.Component{
             <>
               <SideMenu/>
               <main>
+                <div className="liveCount">
+                  <h1>Live Count</h1>
+                  <Row gutter={16}>
+                    <Col span={8}>
+                      <h2 className="active">Active : {this.state.totalactive}</h2>
+                    </Col>
+                    <Col span={8}>
+                      <h2 className="death">Deaths : {this.state.totaldeaths}</h2>
+                    </Col>
+                    <Col span={8}>
+                      <h2 className="recovered">Recovered : {this.state.totalrecovered}</h2>
+                    </Col>
+                  </Row>
+                </div>
                 <Row gutter={32}>
                   <Col span={12}>
                     <div className="table">

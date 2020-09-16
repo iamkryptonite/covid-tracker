@@ -3,3 +3,29 @@ main{
     margin-right: 100px !important;
     padding-top: 70px !important;
 }
+.liveCount{
+    margin-bottom: 3rem;
+}
+.liveCount h1{
+    font-size: 4rem;
+    text-align: center;
+}
+.liveCount h2{
+    font-size: 3rem;
+    text-align: center;
+}
+.liveCount h2.active{
+    color:#06418a;
+    background-color: #79aded;
+    border-radius: 10px;
+}
+.liveCount h2.death{
+    color:#a31414;
+    background-color: #ff6e6e;
+    border-radius: 10px;
+}
+.liveCount h2.recovered{
+    color:#118a06;
+    background-color: #98e092;
+    border-radius: 10px;
+}

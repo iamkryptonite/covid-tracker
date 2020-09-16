@@ -148,7 +148,8 @@ class Home extends React.Component{
             totalactive:parseInt(el.active),
             totalconfirmed:parseInt(el.confirmed),
             totaldeaths:parseInt(el.deaths),
-            totalrecovered:parseInt(el.recovered)
+            totalrecovered:parseInt(el.recovered),
+            updateTime:el.lastupdatedtime
           })
         }
       })
@@ -176,25 +177,25 @@ class Home extends React.Component{
       // let line2=line;
       console.log(line1);
       line1.datasets[0].label="Daily Confirmed Cases";
-      line1.datasets[0].borderColor="#d13f3f";
-      line1.datasets[0].pointBorderColor="#d13f3f";
-      line1.datasets[0].pointHoverBackgroundColor="#d13f3f";
-      line1.datasets[0].pointHoverBorderColor="#d13f3f";
+      line1.datasets[0].borderColor="#06418a";
+      line1.datasets[0].pointBorderColor="#06418a";
+      line1.datasets[0].pointHoverBackgroundColor="#06418a";
+      line1.datasets[0].pointHoverBorderColor="#06418a";
       line1.datasets[0].data=this.state.active;
       line1.labels=this.state.labels;
       line2.labels=this.state.labels;
       line3.labels=this.state.labels;
       line2.datasets[0].label="Daily Deaths";
-      line2.datasets[0].borderColor="#8a8a8a";
-      line2.datasets[0].pointBorderColor="#8a8a8a";
-      line2.datasets[0].pointHoverBackgroundColor="#8a8a8a";
-      line2.datasets[0].pointHoverBorderColor="#8a8a8a";
+      line2.datasets[0].borderColor="#a31414";
+      line2.datasets[0].pointBorderColor="#a31414";
+      line2.datasets[0].pointHoverBackgroundColor="#a31414";
+      line2.datasets[0].pointHoverBorderColor="#a31414";
       line2.datasets[0].data=this.state.deaths;
       line3.datasets[0].label="Daily Recovery";
-      line3.datasets[0].borderColor="#30c238";
-      line3.datasets[0].pointBorderColor="#30c238";
-      line3.datasets[0].pointHoverBackgroundColor="#30c238";
-      line3.datasets[0].pointHoverBorderColor="#30c238";
+      line3.datasets[0].borderColor="#118a06";
+      line3.datasets[0].pointBorderColor="#118a06";
+      line3.datasets[0].pointHoverBackgroundColor="#118a06";
+      line3.datasets[0].pointHoverBorderColor="#118a06";
       line3.datasets[0].data=this.state.recovered;
       this.setState({line1:line1,line2:line2,line3:line3})
 
@@ -221,6 +222,7 @@ class Home extends React.Component{
                       <h2 className="recovered">Recovered : {this.state.totalrecovered}</h2>
                     </Col>
                   </Row>
+                  <h5>Last updated: {this.state.updateTime}</h5>
                 </div>
                 <Row gutter={32}>
                   <Col span={12}>
@@ -228,7 +230,7 @@ class Home extends React.Component{
                       <Table columns={columns} dataSource={this.state.data} onChange={this.onChange} pagination={false} size={"small"}/>
                     </div>
                   </Col>
-                  {/* <Col span={2}/> */}
+                  <Col span={2}/>
                   <Col span={10}>
                     <Line data={this.state.line1} />
                     <br/>

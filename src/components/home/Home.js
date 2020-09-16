@@ -46,7 +46,7 @@ const columns = [
   ];
 var data=[];
 var line1 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: "",
   datasets: [
     {
       label: 'Daily Confirmed Cases',
@@ -72,7 +72,7 @@ var line1 = {
   ]
 };
 var line2 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: "",
   datasets: [
     {
       label: 'Daily Confirmed Cases',
@@ -98,7 +98,7 @@ var line2 = {
   ]
 };
 var line3 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels:"",
   datasets: [
     {
       label: 'Daily Confirmed Cases',
@@ -125,7 +125,7 @@ var line3 = {
 };
 
 class Home extends React.Component{
-    state={recovered:[],deaths:[],active:[]};
+    state={recovered:[],deaths:[],active:[],labels:[]};
     componentDidMount(){
       axios.get('https://api.covid19india.org/data.json').then(res=>{
       this.setState({
@@ -150,11 +150,13 @@ class Home extends React.Component{
           this.state.active.push(parseInt(el.dailyconfirmed));
           this.state.deaths.push(parseInt(el.dailydeceased));
           this.state.recovered.push(parseInt(el.dailyrecovered));
+          this.state.labels.push(el.date);
           t++;
-          if(t>10){
+          if(t>8){
             this.state.active.shift();
             this.state.deaths.shift();
             this.state.recovered.shift();
+            this.state.labels.shift();
           }
       })
     })
@@ -172,6 +174,9 @@ class Home extends React.Component{
       line1.datasets[0].pointHoverBackgroundColor="#d13f3f";
       line1.datasets[0].pointHoverBorderColor="#d13f3f";
       line1.datasets[0].data=this.state.active;
+      line1.labels=this.state.labels;
+      line2.labels=this.state.labels;
+      line3.labels=this.state.labels;
       line2.datasets[0].label="Daily Deaths";
       line2.datasets[0].borderColor="#8a8a8a";
       line2.datasets[0].pointBorderColor="#8a8a8a";
@@ -202,8 +207,8 @@ class Home extends React.Component{
                       <Table columns={columns} dataSource={this.state.data} onChange={this.onChange} pagination={false} size={"small"}/>
                     </div>
                   </Col>
-                  <Col span={2}/>
-                  <Col span={8}>
+                  {/* <Col span={2}/> */}
+                  <Col span={10}>
                     <Line data={this.state.line1} />
                     <br/>
                     <br/>

@@ -145,10 +145,10 @@ class Home extends React.Component{
           })
         }else{
           this.setState({
-            totalactive:parseInt(el.active),
-            totalconfirmed:parseInt(el.confirmed),
+            totalactive:Math.round(parseInt(el.active)/1000),
+            totalconfirmed:Math.round(parseInt(el.confirmed)/1000),
             totaldeaths:parseInt(el.deaths),
-            totalrecovered:parseInt(el.recovered),
+            totalrecovered:Math.round(parseInt(el.recovered)/1000),
             updateTime:el.lastupdatedtime
           })
         }
@@ -213,13 +213,13 @@ class Home extends React.Component{
                   <h1>Live Count</h1>
                   <Row gutter={16}>
                     <Col span={8}>
-                      <h2 className="active">Active : {this.state.totalactive}</h2>
+                      <h2 className="active">Active : {this.state.totalactive}K</h2>
                     </Col>
                     <Col span={8}>
                       <h2 className="death">Deaths : {this.state.totaldeaths}</h2>
                     </Col>
                     <Col span={8}>
-                      <h2 className="recovered">Recovered : {this.state.totalrecovered}</h2>
+                      <h2 className="recovered">Recovered : {this.state.totalrecovered}K</h2>
                     </Col>
                   </Row>
                   <h5>Last updated: {this.state.updateTime}</h5>
@@ -230,7 +230,7 @@ class Home extends React.Component{
                       <Table columns={columns} dataSource={this.state.data} onChange={this.onChange} pagination={false} size={"small"}/>
                     </div>
                   </Col>
-                  <Col span={2}/>
+                  <Col span={1}/>
                   <Col span={10}>
                     <Line data={this.state.line1} />
                     <br/>

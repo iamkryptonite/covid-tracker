@@ -8,5 +8,9 @@
         "totalconfirmed",
         "totaldeceased",
         "totalrecovered"
+    ],
+    "cSpell.words": [
+        "Chloropeth",
+        "statecode"
     ]
 }

@@ -134,7 +134,7 @@ class Home extends React.Component{
       })
       var key=1;
       this.state.statewise.forEach(el => {
-        if(el.statecode!=='TT'){
+        if(el.statecode!=='TT' && el.statecode!=='UN'){
           data.push({
             key:String(key++),
             name:el.state,
@@ -143,7 +143,7 @@ class Home extends React.Component{
             deaths:parseInt(el.deaths),
             recovered:parseInt(el.recovered)
           })
-        }else{
+        }else if(el.statecode ==='TT'){
           this.setState({
             totalactive:Math.round(parseInt(el.active)/1000),
             totalconfirmed:Math.round(parseInt(el.confirmed)/1000),

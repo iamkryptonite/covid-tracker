@@ -4,12 +4,11 @@ import { Table,Row,Col } from 'antd'
 import './Home.css'
 import SideMenu from '../../constants/SideMenu'
 import {Line} from 'react-chartjs-2';
+import Chloropeth from '../chloropeth/Chloropeth'
 const columns = [
     {
       title: 'Name',
       dataIndex: "name",
-
-     
     },
     {
       title: 'Active',
@@ -241,6 +240,9 @@ class Home extends React.Component{
                     <br/>
                     <br/>
                     <Line data={this.state.line3} />
+                    <br/>
+                    <br/>
+                    <br/>
                   </Col>
                 </Row>
               </main>

@@ -3,6 +3,7 @@ import axios from 'axios'
 import { scaleQuantize } from 'd3-scale';
 import './Chloropeth.css'
 import {ComposableMap, Geographies, Geography} from 'react-simple-maps';
+import ReactTooltip from 'react-tooltip';
 const INDIA_TOPO_JSON = require('./india.topo.json');
 const geographyStyle = {
 default: {
@@ -18,7 +19,7 @@ pressed: {
 }
 };
 const PROJECTION_CONFIG = {
-    scale: 500,
+    scale: 310,
     center: [78.9629, 22.5937]
   };
 const DEFAULT_COLOR="#a3a3a3";
@@ -60,6 +61,7 @@ class Chloropeth extends React.Component{
                 this.setState({data:data});
             })
         })
+        console.log(this.props);
     }
     render(){
         return(
@@ -67,8 +69,8 @@ class Chloropeth extends React.Component{
                 <ComposableMap
                     projectionConfig={PROJECTION_CONFIG}
                     projection="geoMercator"
-                    width={600}
-                    height={290}
+                    width={350}
+                    height={170}
                     data-tip=""
                 >
                     <Geographies geography={INDIA_TOPO_JSON}>
@@ -81,14 +83,21 @@ class Chloropeth extends React.Component{
                                 geography={geo}
                                 fill={colorScale(current ? current.value : "#EEE")}
                                 style={geographyStyle}
-                                // onMouseEnter={onMouseEnter(geo, current)}
-                                // onMouseLeave={onMouseLeave}
+                                onMouseEnter={() => {
+                                    const { name } = geo.properties;
+                                    const current = this.state.data.find(s => s.id === geo.id);
+                                    this.props.setTooltipContent(name+" "+current.value);
+                                }}
+                                onMouseLeave={() => {
+                                    this.props.setTooltipContent("");
+                                }}
                                 />
                             );
                         })
                     }
                     </Geographies>
                 </ComposableMap>
+                <ReactTooltip/>
             </>
         )
     }

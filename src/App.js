@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
 import './App.css';
 import Home from './components/home/Home'
-import Chloropeth from './components/chloropeth/Chloropeth'
+import Statewise from './components/statewise/Statewise';
 // import axios from 'axios';
 class App extends React.Component{ 
   render(){
@@ -11,11 +11,11 @@ class App extends React.Component{
         <BrowserRouter>
           <Switch>
             <Route exact path="/"><Home/></Route>
-            <Route exact path="/map"><Chloropeth/></Route>
+            <Route exact path="/map"><Statewise/></Route>
           </Switch>
         </BrowserRouter>
       </div>
     );
-  }  
+  }
 }
 export default App;

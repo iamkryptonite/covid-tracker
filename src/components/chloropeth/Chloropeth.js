@@ -1,27 +1,16 @@
 import React from 'react'
 import axios from 'axios'
-import { scaleQuantile } from 'd3-scale';
+import { scaleQuantize } from 'd3-scale';
 import './Chloropeth.css'
 import {ComposableMap, Geographies, Geography} from 'react-simple-maps';
 const INDIA_TOPO_JSON = require('./india.topo.json');
-const COLOR_RANGE = [
-    '#ffedea',
-    '#ffcec5',
-    '#ffad9f',
-    '#ff8a75',
-    '#ff5533',
-    '#e2492d',
-    '#be3d26',
-    '#9a311f',
-    '#782618'
-  ];
 const geographyStyle = {
 default: {
     outline: 'none'
 },
 hover: {
-    fill: '#ccc',
-    transition: 'all 850ms',
+    fill: '#000',
+    transition: 'all 85ms',
     outline: 'none'
 },
 pressed: {
@@ -29,10 +18,23 @@ pressed: {
 }
 };
 const PROJECTION_CONFIG = {
-    scale: 400,
+    scale: 500,
     center: [78.9629, 22.5937]
   };
 const DEFAULT_COLOR="#a3a3a3";
+const colorScale = scaleQuantize()
+    .domain([100, 90000])
+    .range([
+        "#ffedea",
+        "#ffcec5",
+        "#ffad9f",
+        "#ff8a75",
+        "#ff5533",
+        "#e2492d",
+        "#be3d26",
+        "#9a311f",
+        "#782618"
+]);
 
 class Chloropeth extends React.Component{
     state={
@@ -59,12 +61,6 @@ class Chloropeth extends React.Component{
             })
         })
     }
-    colorScale=(e)=>{
-        console.log(e);
-        // var offset=(this.state.min+this.state.max)/8;
-        // var idx=(e-this.state.min)/offset;
-        // return COLOR_RANGE[Math.round(idx-1)];
-    }
     render(){
         return(
             <>
@@ -72,7 +68,7 @@ class Chloropeth extends React.Component{
                     projectionConfig={PROJECTION_CONFIG}
                     projection="geoMercator"
                     width={600}
-                    height={220}
+                    height={290}
                     data-tip=""
                 >
                     <Geographies geography={INDIA_TOPO_JSON}>
@@ -83,7 +79,7 @@ class Chloropeth extends React.Component{
                                 <Geography
                                 key={geo.rsmKey}
                                 geography={geo}
-                                fill={this.colorScale(current)}
+                                fill={colorScale(current ? current.value : "#EEE")}
                                 style={geographyStyle}
                                 // onMouseEnter={onMouseEnter(geo, current)}
                                 // onMouseLeave={onMouseLeave}

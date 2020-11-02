@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{memo} from 'react'
 import axios from 'axios'
 import { scaleQuantize } from 'd3-scale';
 import './Chloropeth.css'
@@ -102,4 +102,4 @@ class Chloropeth extends React.Component{
         )
     }
 }
-export default Chloropeth;
+export default memo(Chloropeth);

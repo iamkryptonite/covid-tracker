@@ -26,7 +26,7 @@ class SideMenu extends React.Component{
                 <Menu.Item key="1" icon={<HomeOutlined />}>
                   <a href="/">Home</a>
                 </Menu.Item>
-                <Menu.Item key="sub1" icon={<LineChartOutlined />} title="Statewise">
+                <Menu.Item key="2" icon={<LineChartOutlined />} title="Statewise">
                   <a href="/map">Statewise</a>
                 </Menu.Item>
                 <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">

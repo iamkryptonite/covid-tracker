@@ -2,7 +2,7 @@
   "name": "covidtracker",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://iamkrytonite.github.io/covidtracker",
+  "homepage": "http://iamkrytonite.github.io/Covid-tracker-2.0",
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
     "@testing-library/jest-dom": "^4.2.4",

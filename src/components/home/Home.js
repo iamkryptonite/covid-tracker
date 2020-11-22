@@ -172,8 +172,6 @@ class Home extends React.Component{
     })
     .then(()=>{
       this.setState({data:data});
-      // let line1=line;
-      // let line2=line;
       console.log(line1);
       line1.datasets[0].label="Daily Confirmed Cases";
       line1.datasets[0].borderColor="#06418a";

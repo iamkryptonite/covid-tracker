@@ -72,6 +72,7 @@ class Chloropeth extends React.Component{
                     width={350}
                     height={170}
                     data-tip=""
+                    data-html={true}
                 >
                     <Geographies geography={INDIA_TOPO_JSON}>
                     {({ geographies }) =>
@@ -86,7 +87,7 @@ class Chloropeth extends React.Component{
                                 onMouseEnter={() => {
                                     const { name } = geo.properties;
                                     const current = this.state.data.find(s => s.id === geo.id);
-                                    this.props.setTooltipContent(name+" "+current.value);
+                                    this.props.setTooltipContent(name+"</br>"+"Active Cases : "+current.value+"</br>");
                                 }}
                                 onMouseLeave={() => {
                                     this.props.setTooltipContent("");
@@ -97,7 +98,7 @@ class Chloropeth extends React.Component{
                     }
                     </Geographies>
                 </ComposableMap>
-                <ReactTooltip/>
+                <ReactTooltip html={true}/>
             </>
         )
     }

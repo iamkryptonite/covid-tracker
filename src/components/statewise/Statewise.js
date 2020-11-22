@@ -6,7 +6,7 @@ class Statewise extends React.Component{
     render(){
         return(
             <>
-                <SideMenu/>
+                <SideMenu menuKey={'2'}/>
                 <Map/>
             </>
         )

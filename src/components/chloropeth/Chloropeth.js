@@ -7,7 +7,7 @@ import ReactTooltip from 'react-tooltip';
 const INDIA_TOPO_JSON = require('./india.topo.json');
 const geographyStyle = {
 default: {
-    stroke: '#fff',
+    stroke: '#000',
     strokeWidth: '0.1px'
 },
 hover: {

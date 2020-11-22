@@ -1,0 +1,12 @@
+p.hover{
+    position: absolute;
+    top:3vw;
+    right:3vw;
+    font-size: 15px;
+    color: #fff;
+    padding: 25px;
+    background-color: rgb(165, 165, 165);
+    border-radius: 10px;
+    opacity: 0.5;
+    border: 1px solid #000;
+}

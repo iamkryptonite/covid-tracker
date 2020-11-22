@@ -3,8 +3,8 @@ import {BrowserRouter,Route,Switch} from 'react-router-dom';
 import './App.css';
 import Home from './components/home/Home'
 import Statewise from './components/statewise/Statewise';
-// import axios from 'axios';
-class App extends React.Component{ 
+class App extends React.Component{
+  state={key:'1'} 
   render(){
     return (
       <div className="App">

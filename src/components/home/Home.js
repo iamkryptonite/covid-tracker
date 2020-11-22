@@ -4,7 +4,6 @@ import { Table,Row,Col } from 'antd'
 import './Home.css'
 import SideMenu from '../../constants/SideMenu'
 import {Line} from 'react-chartjs-2';
-import Chloropeth from '../chloropeth/Chloropeth'
 const columns = [
     {
       title: 'Name',
@@ -204,7 +203,7 @@ class Home extends React.Component{
     render(){
        return(
             <>
-              <SideMenu/>
+              <SideMenu menuKey={'1'}/>
               <main>
                 <div className="liveCount">
                   <h1>Live Count</h1>

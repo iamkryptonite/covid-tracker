@@ -4,7 +4,7 @@ import './Chloropeth.css'
 import {ComposableMap, Geographies, Geography} from 'react-simple-maps';
 import ReactTooltip from 'react-tooltip';
 const INDIA_TOPO_JSON = require('./india.topo.json');
-const {geographyStyle,PROJECTION_CONFIG,DEFAULT_COLOR,colorScale} = require('./func');
+const {geographyStyle,PROJECTION_CONFIG,colorScale} = require('./func');
 class Chloropeth extends React.Component{
     state={data:[]};
     componentDidMount(){
@@ -46,7 +46,7 @@ class Chloropeth extends React.Component{
                                 onMouseEnter={() => {
                                     const { name } = geo.properties;
                                     const current = this.state.data.find(s => s.id === geo.id);
-                                    this.props.setTooltipContent(name+"</br>"+"Active Cases : "+current.value+"</br>");
+                                    this.props.setTooltipContent(name+"</br>Active Cases : "+current.value+"</br>");
                                 }}
                                 onMouseLeave={() => {
                                     this.props.setTooltipContent("");

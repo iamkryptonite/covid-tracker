@@ -1,49 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-import { scaleQuantize } from 'd3-scale';
 import './Chloropeth.css'
 import {ComposableMap, Geographies, Geography} from 'react-simple-maps';
 import ReactTooltip from 'react-tooltip';
 const INDIA_TOPO_JSON = require('./india.topo.json');
-const geographyStyle = {
-default: {
-    stroke: '#000',
-    strokeWidth: '0.1px'
-},
-hover: {
-    fill: '#000',
-    transition: 'all 85ms',
-    outline: 'none'
-},
-pressed: {
-    outline: 'none'
-}
-};
-const PROJECTION_CONFIG = {
-    scale: 310,
-    center: [78.9629, 22.5937]
-  };
-const DEFAULT_COLOR="#a3a3a3";
-const colorScale = scaleQuantize()
-    .domain([100, 90000])
-    .range([
-        "#ffedea",
-        "#ffcec5",
-        "#ffad9f",
-        "#ff8a75",
-        "#ff5533",
-        "#e2492d",
-        "#be3d26",
-        "#9a311f",
-        "#782618"
-]);
-
+const {geographyStyle,PROJECTION_CONFIG,DEFAULT_COLOR,colorScale} = require('./func');
 class Chloropeth extends React.Component{
-    state={
-        data:[],
-        min:-1,
-        max:-1,
-    };
+    state={data:[]};
     componentDidMount(){
         var data=[];
         axios.get('https://api.covid19india.org/data.json').then(res=>{
@@ -54,15 +17,10 @@ class Chloropeth extends React.Component{
                     state:el.state,
                     value:parseInt(el.active)
                     })
-                    if(this.state.min===-1 || this.state.min>parseInt(el.active))
-                    this.setState({min:parseInt(el.active)});
-                    if(this.state.max===-1 || this.state.min<parseInt(el.active))
-                    this.setState({max:parseInt(el.active)});
                 }
                 this.setState({data:data});
             })
         })
-        console.log(this.props);
     }
     render(){
         return(

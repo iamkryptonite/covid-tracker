@@ -13,14 +13,10 @@ class SideMenu extends React.Component{
       console.log(collapsed);
       this.setState({ collapsed });
     };
-    handleClick=(e)=>{
-      console.log(e);
-    }
     render() {
-      console.log(this.props)
       return (
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse} style={{height:'100vh'}}>
-          <div className="logo">LOGO</div>
+          <div className="logo">COVID Tracker</div>
           <Menu theme="dark" defaultSelectedKeys={[this.state.key]} mode="inline">
             <Menu.Item key="1" icon={<HomeOutlined />}>
               <a href="/">Home</a>

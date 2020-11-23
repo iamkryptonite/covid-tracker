@@ -1,6 +1,6 @@
 import React from 'react'
 import { Layout, Menu} from 'antd';
-import {HomeOutlined,LineChartOutlined} from '@ant-design/icons';
+import {HomeOutlined,LineChartOutlined,FileSearchOutlined,AlertOutlined} from '@ant-design/icons';
 import './styles/SideMenu.css'
 import 'antd/dist/antd.css';
 const { Sider } = Layout;
@@ -23,6 +23,12 @@ class SideMenu extends React.Component{
             </Menu.Item>
             <Menu.Item key="2" icon={<LineChartOutlined />} title="Statewise">
               <a href="/map">Statewise</a>
+            </Menu.Item>
+            <Menu.Item key="3" icon={<FileSearchOutlined />} title="Symptoms">
+              <a href="/symptoms">Symptoms</a>
+            </Menu.Item>
+            <Menu.Item key="4" icon={<AlertOutlined />} title="precautions">
+              <a href="/precautions">Precautions</a>
             </Menu.Item>
           </Menu>
         </Sider>

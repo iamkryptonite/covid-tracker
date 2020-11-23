@@ -3,6 +3,7 @@ import {BrowserRouter,Route,Switch} from 'react-router-dom';
 import './App.css';
 import Home from './components/home/Home'
 import Statewise from './components/statewise/Statewise';
+import Symptoms from './components/symptoms/Symptoms'
 class App extends React.Component{
   state={key:'1'} 
   render(){
@@ -11,7 +12,8 @@ class App extends React.Component{
         <BrowserRouter>
           <Switch>
             <Route exact path="/"><Home/></Route>
-            <Route exact path="/map"><Statewise/></Route>
+            <Route path="/map"><Statewise/></Route>
+            <Route path="/symptoms"><Symptoms/></Route>
           </Switch>
         </BrowserRouter>
       </div>

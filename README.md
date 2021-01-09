@@ -17,3 +17,10 @@ This is a vey simple web app that shows you the current covid-19 stats across al
 Thats it!
 
 ### Live link: https://cv19track.herokuapp.com/
+![Screenshot](d1.png)
+
+![Screenshot](d2.png)
+
+![Screenshot](d3.png)
+
+

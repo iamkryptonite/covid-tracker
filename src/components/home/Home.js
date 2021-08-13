@@ -28,10 +28,10 @@ class Home extends React.Component{
           })
         }else if(el.statecode ==='TT'){
           this.setState({
-            totalactive:Math.round(parseInt(el.active)/1000),
-            totalconfirmed:Math.round(parseInt(el.confirmed)/1000),
+            totalactive:parseInt(el.active),
+            totalconfirmed:parseInt(el.confirmed),
             totaldeaths:parseInt(el.deaths),
-            totalrecovered:Math.round(parseInt(el.recovered)/1000),
+            totalrecovered:parseInt(el.recovered),
             updateTime:el.lastupdatedtime
           })
         }
@@ -69,6 +69,15 @@ class Home extends React.Component{
     onChange(pagination, filters, sorter, extra) {
       console.log('params', pagination, filters, sorter, extra);
     }
+    formatNumber(value){
+      return Math.abs(Number(value)) >= 1e+9
+      ? (Math.abs(Number(value)) / 1e+9).toFixed(0) + "B"
+      : Math.abs(Number(value)) >= 1e+6
+      ? (Math.abs(Number(value)) / 1e+6).toFixed(0) + "M"
+      : Math.abs(Number(value)) >= 1e+3
+      ? (Math.abs(value) / 1e+3).toFixed(0) + "K"
+      : Math.abs(Number(value));
+    }
     render(){
        return(
             <>
@@ -78,13 +87,13 @@ class Home extends React.Component{
                   <h1>Live Count</h1>
                   <Row gutter={16}>
                     <Col span={8}>
-                      <h2 className="active">Active : {this.state.totalactive}K</h2>
+                      <h2 className="active">Active : {this.formatNumber(this.state.totalactive)}</h2>
                     </Col>
                     <Col span={8}>
-                      <h2 className="death">Deaths : {this.state.totaldeaths}</h2>
+                      <h2 className="death">Deaths : {this.formatNumber(this.state.totaldeaths)}</h2>
                     </Col>
                     <Col span={8}>
-                      <h2 className="recovered">Recovered : {this.state.totalrecovered}K</h2>
+                      <h2 className="recovered">Recovered : {this.formatNumber(this.state.totalrecovered)}</h2>
                     </Col>
                   </Row>
                   <h5>Last updated: {this.state.updateTime}</h5>

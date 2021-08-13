@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{memo} from 'react'
 import axios from 'axios'
 import './Chloropeth.css'
 import {ComposableMap, Geographies, Geography} from 'react-simple-maps';
@@ -62,4 +62,4 @@ class Chloropeth extends React.Component{
         )
     }
 }
-export default Chloropeth;
+export default memo(Chloropeth);
